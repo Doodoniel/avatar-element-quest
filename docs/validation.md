@@ -1,7 +1,9 @@
-# Validation scope
+# Validation
 
-Production build, TypeScript checks, non-browser HTTP route checks, and score/content integrity checks are performed for the first version. Automated quiz checks cover both levels, score totals, duplicate prevention, turn rotation, invalid input, persistence restoration and asset references.
+Production build, TypeScript checks and score/content integrity checks passed. Checks cover both levels, totals, duplicate prevention, turn rotation, invalid input, persistence recovery and asset references.
 
-Generated art is visually inspected as image files. Browser screenshots and interaction QA were not requested and are not claimed. Optional WebMCP is feature-detected; a supported live validation context was not available, so its runtime registration is not verified. This does not affect the visible interface.
+The first hosted build had a production-only vinext Link navigation failure: the browser displayed the home screen but clicking a section threw a client routing error. All game navigation now uses native HTML anchors. The routes remain separate pages and local progress remains stored on this device.
 
-Instructional claims are limited to an adaptation informed by CEFR and British Council video teaching guidance. A classroom pilot is still needed to tune difficulty, timing and reading load to the children's age and experience.
+The corrected production Worker build was tested through the browser: home to heroes, level switching, next-stop navigation, map selection, vocabulary reveal, quiz question opening, correct-answer feedback, 100-point award and team rotation, independent quiz levels, sentence building, and movie-time route. Every route also returned HTTP 200. Video playback and installed text-to-speech voices require the user's media/device and were not asserted.
+
+Generated art was visually inspected. Optional WebMCP runtime registration remains outside this regression check. The visible UI works without it.
