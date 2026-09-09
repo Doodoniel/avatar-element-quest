@@ -27,3 +27,7 @@ The movie itself is not bundled. Open a local video file in Movie time or use yo
 Progress and separate quiz scores use localStorage on the current browser/device. There are no student accounts. Next-stop completion means visited, not assessed mastery. Spoken answers are teacher-led and are not automatically evaluated.
 
 Location and character illustrations were made with the built-in image generation tool; prompt manifests are in docs. The supplied source map and vocabulary illustrations are retained with corrected English teaching labels and contextual notes. See the in-app teacher guide for sources and ownership notes.
+
+## Explorer adventure
+
+The /rescue route is Appa's Rescue Flight: a playable snowy-shore scene with sliced character frames, water rescue animation, free flight controls, ordered sentence collection and delivery. Explorer's word section leads into the adventure. Speech is encouraged with teacher confirmation, never automatically scored. There is no timer or failure penalty. Use arrow keys, on-screen controls, or tap destinations. Pause and restart are available. Run node scripts/check-rescue.mjs for game-state checks. Artwork prompts are in docs/rescue-image-prompts.json; original sheets and sliced frames are in public/assets/rescue.

@@ -1,0 +1,25 @@
+{
+  "tool": "Built-in imagegen",
+  "prompts": [
+    [
+      "rescue-bg",
+      "Landscape 16:9 background for a side-view children's 2D Avatar The Last Airbender adventure game. Beautiful clean cel-shaded cartoon like the 2005 animated show. Southern Water Tribe snowy shore in daylight: broad flat snowy ledge in lower LEFT foreground for a character to stand, bright cyan sea in center, small floating ice floe lower RIGHT for supply sack, charming tiny igloo village upper RIGHT background, mountains, soft clouds. No characters no text no UI. Simple clean shapes, crisp animation background, rich blue shadows, cheerful inviting atmosphere. Composition remains clear behind animated sprites."
+    ],
+    [
+      "katara-sheet",
+      "Create a production sprite sheet PNG with TRUE TRANSPARENT background, 2 columns and 2 rows exactly equal cells, no borders no labels. Four separate full-body poses of Katara from Avatar The Last Airbender 2005 episode 1. Recognizable brown hair braid with face loops, blue eyes, blue Water Tribe fur parka skirt trousers and boots. Clean crisp 2D cel-shaded animated cartoon style. All four figures exact same design scale and baseline, fully visible with wide padding in their cell, facing right three-quarter. TOP LEFT friendly idle hands down; TOP RIGHT raising hands starting waterbending; BOTTOM LEFT arms extended right waterbending; BOTTOM RIGHT smiling happy wave. No water baked in, no ground shadows, no props, no lettering. Transparent alpha around each figure. Format square."
+    ],
+    [
+      "appa-sheet",
+      "Production 2D animation sprite sheet, transparent alpha PNG. 2 by 2 equal cells, no borders or text. Each cell contains SAME Appa from Avatar The Last Airbender in full-body SIDE VIEW flying to the RIGHT. White fluffy bison, six legs, two horns, flat friendly face, brown arrow markings, brown saddle. Four subtle different flight poses for looping: paws tucked, paws slightly extended, paws lowered, paws return to tucked; gentle tail motion. Same scale position orientation and silhouette aligned in all 4 cells. All limbs horns tail completely inside each cell with wide transparent padding. Recognizable crisp 2005 cartoon cel-shaded style, not photoreal. Absolutely no background no shadows no text."
+    ],
+    [
+      "supplies",
+      "Single game inventory sprite: a tied brown cloth supply sack with rope, small folded red blanket strapped on top. Clean cel-shaded animated cartoon style matching Avatar 2005 Water Tribe setting. Three-quarter view. Centered fully visible with generous padding. TRUE TRANSPARENT alpha background, no floor shadow, no text no borders. Friendly clear silhouette readable at 80 pixels."
+    ],
+    [
+      "water-arc",
+      "Single VFX sprite for a cartoon waterbending game. TRUE TRANSPARENT background. Bright cyan turquoise flowing water ribbon rises from lower LEFT to upper RIGHT in a graceful curved S/crescent arc. Clean cel-shaded 2D animation style matching Avatar 2005. A few separate droplets around the arc, white highlights, clear fluid outline. Wide 3:2 composition, all water within bounds, plenty transparent margin. No characters objects text frame or background."
+    ]
+  ]
+}
