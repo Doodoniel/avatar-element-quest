@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+const source=ts.transpileModule(fs.readFileSync('components/game/appa-animation.ts','utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
+const {appaPoseFrames,appaBobFrames,appaCycle}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+assert.equal(appaCycle.iterations,Infinity,'Flight must not stop after one cycle');
+const layers=[0,1,2,3].map(appaPoseFrames);
+for(let frame=0;frame<7;frame++)assert.equal(layers.reduce((sum,layer)=>sum+layer[frame].opacity,0),1,'Exactly one pose must be visible, including the loop boundary');
+for(const layer of layers)assert.equal(layer[0].opacity,layer.at(-1).opacity,'No blank frame on wrap');
+assert.equal(appaBobFrames[0].transform,appaBobFrames.at(-1).transform);
+assert(new Set(appaBobFrames.map(frame=>frame.transform)).size>1);
+console.log('PASS: infinite flight, visible poses throughout each cycle, seamless body and pose loop.');
