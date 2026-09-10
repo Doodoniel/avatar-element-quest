@@ -12,3 +12,26 @@ body .exp-page{height:100dvh;min-height:0;display:flex;flex-direction:column;bac
 .nation-card,.portrait{animation:none}.quiz-column.air .quiz-tile{border-top:6px solid #c2a14e}.quiz-column.water .quiz-tile{border-top:6px solid #287896}.quiz-column.earth .quiz-tile{border-top:6px solid #547c46}.quiz-column.fire .quiz-tile{border-top:6px solid #bb633f}
 .feedback.success{color:#145139}.sentence-line>span{color:#345465}.panel .hint,.sentence-builder .hint{color:#173e57}
 body .exp-console>p[role=status]{display:block;min-height:24px;font-size:18px;line-height:24px;margin:0}
+
+/* Keep instructions beside the controls, not over the moving actors. */
+body .exp-page.playing .exp-top,body .exp-page.playing .exp-objective h1,body .exp-page.playing .exp-objective>small,body .exp-page.playing .exp-bottom-hud>span:nth-child(2){display:none}
+body .exp-page.playing:not(.mission-0) .exp-objective{display:none}
+body .exp-page.playing.mission-0 .exp-objective{top:14px;max-width:65%;padding:8px 12px}
+body .exp-page.playing .mouse-flight-tip{display:none}
+body .exp-page:not(.mission-0):not(.mission-3) .exp-console label{display:none}
+.home-game{display:grid;grid-template-columns:minmax(120px,.65fr) 1.35fr;gap:24px;text-align:left;padding:22px;overflow:auto}
+.home-hero{height:100%;max-height:360px;width:100%;object-fit:contain}.home-question h2{font-size:29px;margin:8px 0 12px}.home-question .answer-options{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.home-question .answer-options button{font-size:20px}.home-question>p,.home-feedback{font-size:21px}.home-feedback{min-height:30px;margin:8px 0}.home-question .spoken-task{margin:8px 0}.home-question .gold-button{margin:8px}
+.talk-quest{flex:1;min-height:0;display:grid;grid-template-columns:.7fr 1.3fr;gap:24px;align-items:center;overflow:auto}.talk-quest>img{width:100%;height:100%;max-height:390px;object-fit:contain}.talk-quest h2{font-size:32px;margin:10px 0}.talk-quest p{font-size:23px;margin:12px 0}.talk-quest .talk-support{padding:12px;background:#e0ecec;border-left:4px solid #39778a}.talk-quest .talk-model{font-size:20px}.talk-quest .gold-button{margin-top:18px}.quiz-dialog .speak-prompt{display:block;font-size:19px;color:#173e57}.celebration .reflection{display:block;margin-top:8px;color:#fff;font-size:19px}
+@media(max-height:700px){.talk-quest{padding:14px;gap:14px}.talk-quest h2{font-size:25px}.talk-quest p{font-size:19px;margin:7px 0}.talk-quest .talk-model{font-size:17px}.talk-quest .gold-button{margin-top:8px}.home-hero{max-height:210px}.home-game{padding:14px}.home-question h2{font-size:24px}.home-question>p,.home-feedback{font-size:18px}.home-question .answer-options button{font-size:18px}}
+/* Story quest: light answer cards rather than dark full-width bars. */
+.screen-challenge .answer-card .answer-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.screen-challenge .answer-card .answer-options>button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4;border-radius:14px;min-height:98px;padding:18px;align-items:center;box-shadow:0 3px 0 #d8ddda;font-size:23px}
+.screen-challenge .answer-card .answer-options>button>span{background:#e5eeec;color:#254b59;border:1px solid #a2b7b9;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex-shrink:0}
+.screen-challenge .answer-card .answer-options>button:hover:not(:disabled){background:#fff0c7;border-color:#9a722c}
+.screen-challenge .answer-card .answer-options>button.correct{background:#deefdf;color:#17492c;border-color:#397d4f;box-shadow:0 3px 0 #92bda0}
+.screen-challenge .answer-card .answer-options>button.incorrect{background:#fbe6de;color:#752f21;border-color:#ad6350;box-shadow:0 3px 0 #d7aa9b}
+.screen-challenge .answer-card>.soft-button,.screen-challenge .answer-card>.text-button,.screen-challenge .sentence-builder .soft-button,.screen-challenge .talk-quest .soft-button{background:#edf1eb;color:#244656;border:1px solid #9daeb1}
+.screen-challenge .answer-card .question-row .eyebrow{display:none}
+.screen-challenge .sentence-line{background:#fffdf6;border:2px dashed #9baeb4;color:#294e5f}
+.screen-challenge .word-bank button,.screen-challenge .sentence-line button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4}
+@media(max-height:700px){.screen-challenge .answer-card .answer-options>button{min-height:65px;padding:12px;font-size:21px}}
