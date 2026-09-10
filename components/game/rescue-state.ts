@@ -4,7 +4,7 @@ export const flightWords=[{text:'He',x:29,y:32},{text:'can',x:52,y:54},{text:'fl
 export const homePoint={x:88,y:48};
 export const startPoint={x:12,y:54};
 export function moveTowards(from:Point,to:Point,distance:number):Point{const dx=to.x-from.x,dy=to.y-from.y,len=Math.hypot(dx,dy);if(len<=distance)return {...to};return {x:from.x+dx/len*distance,y:from.y+dy/len*distance}}
-export function clampPoint(p:Point):Point{return {x:Math.max(8,Math.min(90,p.x)),y:Math.max(20,Math.min(66,p.y))}}
+export function clampPoint(p:Point):Point{return {x:Math.max(8,Math.min(90,p.x)),y:Math.max(18,Math.min(82,p.y))}}
 export function touches(a:Point,b:Point){return Math.hypot(a.x-b.x,a.y-b.y)<7}
 export type RescueState={phase:RescuePhase;found:boolean;waterChosen:boolean;words:number;position:Point;target:Point|null;hint:string};
 export const initialRescue:RescueState={phase:'intro',found:false,waterChosen:false,words:0,position:startPoint,target:null,hint:''};
