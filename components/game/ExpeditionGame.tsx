@@ -1,11 +1,12 @@
 'use client';
 import {useEffect,useLayoutEffect,useRef,useState,type CSSProperties} from 'react';
-import {ArrowLeft,Pause,Play,Volume2,Maximize,Wind,RotateCcw} from 'lucide-react';
+import {ArrowLeft,Pause,Play,Volume2,VolumeX,Maximize,Wind,RotateCcw} from 'lucide-react';
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '@/components/ui/dialog';
 import {cargo,missions,targetFor,rolesFor,gridPaths,canMove,flightObjects,iceOrders,iceStops,optimalIceMoves} from './expedition-state';
 import './expedition.css';
 import {jumpPose,castPose,driftItems,JUMP_SECONDS,CAST_SECONDS,type Jump,type WaterCast} from './expedition-motion';
 import AppaSprite from './AppaSprite';
+import {useGameAudio} from './useGameAudio';
 import {advanceFlight,flightTarget} from './flight-control';
 const noun=(item:string)=>item==='boots'?'a pair of boots':'a '+item;
 const art='/assets/expedition/';
@@ -22,6 +23,22 @@ export default function ExpeditionGame(){
  useEffect(()=>{flightAim.current={x:22,y:48}},[round,phase]);
  const handlers=useRef({move:(n:number)=>{},catchIt:()=>{},pos:24});
  const keys=useRef(new Set<string>()),stage=useRef<HTMLDivElement>(null);const mission=Math.floor(round/3),part=round%3,order=iceOrders[part][Math.min(run.count,2)],target=mission===0?order.item:targetFor(round),data=missions[mission],path=gridPaths[part],objects=flightObjects(round),active=phase==='play'&&!paused&&!restart;
+ const audio=useGameAudio(paused||restart,active&&mission===2);
+ const previousAudio=useRef({round,phase,jump:!!run.jump,cast:!!run.cast,building:run.building,bridge:run.bridge,count:run.count,hits:run.hits,carrying:run.carrying,deliveries:run.deliveries.length});
+ useEffect(()=>{const p=previousAudio.current;
+  if(p.round===round){
+   if(phase==='result'&&p.phase!=='result')audio.play('success');
+   else if(phase==='play'){
+    if(run.jump&&!p.jump)audio.play('jump');
+    if(!run.jump&&p.jump)audio.play('land');
+    if((run.cast&&!p.cast)||(run.building&&!p.building))audio.play('water');
+    if(run.bridge&&!p.bridge)audio.play('ice');
+    if(run.count>p.count||run.deliveries.length>p.deliveries||(run.carrying&&!p.carrying))audio.play('collect');
+    if(run.hits>p.hits)audio.play('bump');
+   }
+  }
+  previousAudio.current={round,phase,jump:!!run.jump,cast:!!run.cast,building:run.building,bridge:run.bridge,count:run.count,hits:run.hits,carrying:run.carrying,deliveries:run.deliveries.length};
+ },[round,phase,!!run.jump,!!run.cast,run.building,run.bridge,run.count,run.hits,run.carrying,run.deliveries.length,audio.play]);
  function landJump(){setRun(s=>!s.jump?s:{...s,jump:null,pos:s.jump.to,carrying:s.carrying,moves:s.moves+1})}
  function anchor(index:number){const w=gridSize.width,h=gridSize.height,cellW=w*.1075,cellH=h/4,size=Math.min(cellW,cellH);return {x:(index%8*12.75+5.375),y:(Math.floor(index/8)*cellH+(cellH-size)/2+size*.43+w*.13*(20/512))/h*100}}
  const pose={...jumpPose(run.pos,run.jump,reduced),...anchor(run.pos),facing:run.facing},water=run.cast?castPose(run.cast):null;
@@ -39,7 +56,7 @@ export default function ExpeditionGame(){
  useEffect(()=>{function down(e:KeyboardEvent){if(!active||(e.target as HTMLElement).closest('input,select,a,[role="dialog"]'))return;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();keys.current.add(e.key);if(mission===0&&!e.repeat)handlers.current.move(handlers.current.pos+({ArrowUp:-8,ArrowDown:8,ArrowLeft:-1,ArrowRight:1}[e.key]||0));if(mission===1&&e.key===' '&&!e.repeat)handlers.current.catchIt();if(mission===1)setRun(s=>({...s,aim:Math.max(8,Math.min(92,s.aim+(e.key==='ArrowLeft'?-4:e.key==='ArrowRight'?4:0)))}))}}function up(e:KeyboardEvent){keys.current.delete(e.key)}function blur(){keys.current.clear();setPaused(true)}window.addEventListener('keydown',down);window.addEventListener('keyup',up);window.addEventListener('blur',blur);return()=>{window.removeEventListener('keydown',down);window.removeEventListener('keyup',up);window.removeEventListener('blur',blur);keys.current.clear()}},[active,mission]);
  function point(e:React.PointerEvent<HTMLElement>){if(!active||(e.target as HTMLElement).closest('button'))return;const r=e.currentTarget.getBoundingClientRect();if(mission===1)setRun(s=>({...s,aim:Math.max(8,Math.min(92,(e.clientX-r.left)/r.width*100))}));if(mission===2)flightAim.current=flightTarget((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100)}
  function deliver(person:number){if(!active||!run.selected)return;const wanted=cargo[(part+person)%5];if(run.deliveries.includes(String(person)))return;if(run.selected===wanted){setRun(s=>({...s,selected:'',deliveries:[...s.deliveries,String(person)]}));setNotice('Thank you! You helped '+['Katara','Sokka','Aang'][person]+'.')}else{setRun(s=>({...s,hits:s.hits+1}));setNotice('Listen again. '+['Katara','Sokka','Aang'][person]+' needs '+wanted+'.')}}
- return <main className={'exp-page mission-'+mission+' '+(phase==='play'?'playing ':'')+(!active?'motion-paused':'')}><header className="exp-header"><a href="/words"><ArrowLeft size={17}/> Word camp</a><strong><Wind size={22}/> {phase==='intro'?'THE SOUTH POLE EXPEDITION':data.name}</strong><div><button onClick={()=>setPaused(!paused)} aria-label={paused?'Resume':'Pause'}>{paused?<Play/>:<Pause/>}</button><button aria-label="Full screen" onClick={()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.()}}><Maximize/></button><button aria-label="Restart expedition" onClick={()=>setRestart(true)}><RotateCcw/></button></div></header>
+ return <main className={'exp-page mission-'+mission+' '+(phase==='play'?'playing ':'')+(!active?'motion-paused':'')}><header className="exp-header"><a href="/words"><ArrowLeft size={17}/> Word camp</a><strong><Wind size={22}/> {phase==='intro'?'THE SOUTH POLE EXPEDITION':data.name}</strong><div><button onClick={audio.toggle} aria-pressed={audio.enabled} aria-label={audio.enabled?"Turn sound effects off":"Turn sound effects on"} title={audio.enabled?"Sound effects on":"Sound effects off"}>{audio.enabled?<Volume2/>:<VolumeX/>}</button><button onClick={()=>setPaused(!paused)} aria-label={paused?'Resume':'Pause'}>{paused?<Play/>:<Pause/>}</button><button aria-label="Full screen" onClick={()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.()}}><Maximize/></button><button aria-label="Restart expedition" onClick={()=>setRestart(true)}><RotateCcw/></button></div></header>
  <section className="exp-scene" ref={stage} onPointerDown={e=>{point(e);if(active&&mission===1&&!(e.target as HTMLElement).closest('button,a,input,.exp-overlay')){const r=e.currentTarget.getBoundingClientRect();catchIt(Math.max(8,Math.min(92,(e.clientX-r.left)/r.width*100)))}}} onPointerMove={e=>{if(e.pointerType==='mouse'||e.buttons)point(e)}} style={{backgroundImage:mission===3?"url('/assets/water.png')":undefined,backgroundPosition:mission===2?`${50+Math.sin(run.time/80)*45}% center`:'center'}}>
  <div className="exp-top"><span>EXPLORER · {mission+1}/4</span><span>{score} expedition stars · Round {round+1}/12</span></div>
  {phase==='intro'?<div className="exp-intro"><h1>South Pole Expedition</h1><div className="exp-settings"><label>Players <input type="number" min="1" step="1" value={pupils} onChange={e=>setPupils(Math.max(1,Math.floor(Number(e.target.value)||1)))}/></label><label><input type="checkbox" checked={easy} onChange={e=>setEasy(e.target.checked)}/> Gentle pace</label></div><button className="exp-gold" onClick={()=>setPhase('brief')}>Start the expedition →</button><a href="/rescue">Try the short tutorial first</a><div className="mission-picker" aria-label="Choose a mission">{missions.map((m,i)=><button key={m.name} onClick={()=>{setRound(i*3);setRun(fresh());setPhase('brief')}}><small>0{i+1}</small>{m.name}</button>)}</div><img src="/assets/rescue/appa-0.png" alt="Appa flying over the water"/></div>:<>
