@@ -16,7 +16,7 @@ export const nations=[
  {id:'air',name:'Air Nomads',people:'Airbenders',home:'Four mountain temples',character:'Aang',sentence:'Aang is from the Air Nomads.',detail:'The Air Nomads had Northern, Southern, Eastern and Western Air Temples. Aang’s home was the Southern Air Temple. They did not all live in the west.',color:'#efdbb4'}
 ];
 export const words=[
- {word:'water',image:'water',meaning:'We drink it. It is in rivers and the sea.',example:'Katara can bend water.',easy:true,asset:'water.png'},
+ {word:'water',image:'water',meaning:'We drink it. It is in rivers and the sea.',example:'Katara can bend water.',easy:true,asset:'vocabulary/water.png'},
  {word:'air',image:'air',meaning:'We breathe it. Wind is moving air.',example:'Aang can bend air.',easy:true,asset:'air.png'},
  {word:'earth',image:'earth',meaning:'The ground, soil and rocks.',example:'Earthbenders can move rocks.',easy:true,asset:'earth.png'},
  {word:'fire',image:'fire',meaning:'It is hot. It gives light and heat.',example:'Zuko can bend fire.',easy:true,asset:'fire.png'},
