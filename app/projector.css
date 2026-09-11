@@ -23,15 +23,33 @@ body .exp-page:not(.mission-0):not(.mission-3) .exp-console label{display:none}
 .home-hero{height:100%;max-height:360px;width:100%;object-fit:contain}.home-question h2{font-size:29px;margin:8px 0 12px}.home-question .answer-options{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.home-question .answer-options button{font-size:20px}.home-question>p,.home-feedback{font-size:21px}.home-feedback{min-height:30px;margin:8px 0}.home-question .spoken-task{margin:8px 0}.home-question .gold-button{margin:8px}
 .talk-quest{flex:1;min-height:0;display:grid;grid-template-columns:.7fr 1.3fr;gap:24px;align-items:center;overflow:auto}.talk-quest>img{width:100%;height:100%;max-height:390px;object-fit:contain}.talk-quest h2{font-size:32px;margin:10px 0}.talk-quest p{font-size:23px;margin:12px 0}.talk-quest .talk-support{padding:12px;background:#e0ecec;border-left:4px solid #39778a}.talk-quest .talk-model{font-size:20px}.talk-quest .gold-button{margin-top:18px}.quiz-dialog .speak-prompt{display:block;font-size:19px;color:#173e57}.celebration .reflection{display:block;margin-top:8px;color:#fff;font-size:19px}
 @media(max-height:700px){.talk-quest{padding:14px;gap:14px}.talk-quest h2{font-size:25px}.talk-quest p{font-size:19px;margin:7px 0}.talk-quest .talk-model{font-size:17px}.talk-quest .gold-button{margin-top:8px}.home-hero{max-height:210px}.home-game{padding:14px}.home-question h2{font-size:24px}.home-question>p,.home-feedback{font-size:18px}.home-question .answer-options button{font-size:18px}}
-/* Story quest: light answer cards rather than dark full-width bars. */
-.screen-challenge .answer-card .answer-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
-.screen-challenge .answer-card .answer-options>button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4;border-radius:14px;min-height:98px;padding:18px;align-items:center;box-shadow:0 3px 0 #d8ddda;font-size:23px}
-.screen-challenge .answer-card .answer-options>button>span{background:#e5eeec;color:#254b59;border:1px solid #a2b7b9;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex-shrink:0}
-.screen-challenge .answer-card .answer-options>button:hover:not(:disabled){background:#fff0c7;border-color:#9a722c}
-.screen-challenge .answer-card .answer-options>button.correct{background:#deefdf;color:#17492c;border-color:#397d4f;box-shadow:0 3px 0 #92bda0}
-.screen-challenge .answer-card .answer-options>button.incorrect{background:#fbe6de;color:#752f21;border-color:#ad6350;box-shadow:0 3px 0 #d7aa9b}
+/* Shared answer cards in Story quest, quiz, vocabulary and home matching. */
+:is(.game-shell,.quiz-dialog) .answer-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+:is(.game-shell,.quiz-dialog) .answer-options>button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4;border-radius:14px;min-height:98px;padding:18px;align-items:center;box-shadow:0 3px 0 #d8ddda;font-size:23px}
+:is(.game-shell,.quiz-dialog) .answer-options>button>span{background:#e5eeec;color:#254b59;border:1px solid #a2b7b9;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex-shrink:0}
+:is(.game-shell,.quiz-dialog) .answer-options>button:hover:not(:disabled){background:#fff0c7;border-color:#9a722c}
+:is(.game-shell,.quiz-dialog) .answer-options>button.correct{background:#deefdf;color:#17492c;border-color:#397d4f;box-shadow:0 3px 0 #92bda0}
+:is(.game-shell,.quiz-dialog) .answer-options>button.incorrect{background:#fbe6de;color:#752f21;border-color:#ad6350;box-shadow:0 3px 0 #d7aa9b}
 .screen-challenge .answer-card>.soft-button,.screen-challenge .answer-card>.text-button,.screen-challenge .sentence-builder .soft-button,.screen-challenge .talk-quest .soft-button{background:#edf1eb;color:#244656;border:1px solid #9daeb1}
 .screen-challenge .answer-card .question-row .eyebrow{display:none}
 .screen-challenge .sentence-line{background:#fffdf6;border:2px dashed #9baeb4;color:#294e5f}
 .screen-challenge .word-bank button,.screen-challenge .sentence-line button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4}
-@media(max-height:700px){.screen-challenge .answer-card .answer-options>button{min-height:65px;padding:12px;font-size:21px}}
+@media(max-height:700px){:is(.game-shell,.quiz-dialog) .answer-options>button{min-height:65px;padding:12px;font-size:21px}}
+
+/* Secondary controls on teaching panels share the light answer palette. */
+:is(.hero-details,.nation-info,.world-practice,.vocab-practice,.panel,.quiz-dialog,.sentence-builder) :is(.soft-button,.text-button),
+body .exp-console button:not(.exp-gold),body .order-voice,
+body .rescue-coach :is(.rescue-secondary,.offering){background:#fffdf6;color:#18394b;border:2px solid #9baeb4;border-radius:10px}
+:is(.hero-details,.nation-info,.world-practice,.vocab-practice,.panel,.quiz-dialog,.sentence-builder) :is(.soft-button,.text-button):hover:not(:disabled),
+body .exp-console button:not(.exp-gold):hover:not(:disabled){background:#fff0c7;border-color:#9a722c}
+body .exp-console button[aria-pressed=true]{background:#ffe096;color:#18394b;border:2px solid #9a722c;box-shadow:inset 0 0 0 1px #9a722c}
+.watch-checks button{background:#fffdf6;color:#18394b;border:2px solid #9baeb4;border-radius:12px}
+.watch-checks button[aria-pressed=true]{background:#deefdf;color:#17492c;border-color:#397d4f}
+.watch-checks .check-box{border-color:#64848b;color:#17492c}
+.home-game .home-question .answer-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+body .say-together{background:#fffdf6;border:2px solid #9baeb4}.say-together .hear-phrase{color:#18394b}
+body .rescue-coach .offering.water{background:#e5f0f3;color:#18394b;border-color:#6796a7}
+:is(.game-shell,.quiz-dialog) .answer-options>button:focus-visible,.watch-checks button:focus-visible{outline:3px solid #997022;outline-offset:3px}
+.quiz-dialog .answer-options>button{font-size:21px;min-height:86px}
+.quiz-dialog .answer-options{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+@media(max-height:700px){.quiz-dialog .answer-options>button{min-height:64px;font-size:19px}}
