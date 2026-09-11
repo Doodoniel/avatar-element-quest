@@ -3,8 +3,8 @@ export const missions = [
  {name:'The ice crossing',subtitle:'Plan a path. Bring the supplies back.',verb:'Find',phrase:'Go left. Go right. Go up. Go down.'},
  {name:'Catch the current',subtitle:'Aim the water. Rescue the right supplies.',verb:'Catch',phrase:'Katara can bend water. Catch it!'},
  {name:'Ride the northern wind',subtitle:'Fly through the pass. Watch the clouds.',verb:'Collect',phrase:'Appa can fly. Go up! Go down!'},
- {name:'A village needs you',subtitle:'Listen to your neighbours. Deliver with care.',verb:'Deliver',phrase:'Here you are! You have got a blanket.'},
 ] as const;
+export const totalExpeditionRounds=missions.length*3;
 export function targetFor(round:number){return cargo[(round*2+Math.floor(round/3))%cargo.length]}
 export function rolesFor(round:number,pupils:number){return [0,1,2].map(i=>(round*3+i)%pupils+1)}
 export const gridPaths = [
