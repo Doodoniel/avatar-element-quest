@@ -4,6 +4,14 @@ A complete multi-file English movie-night game for episode one of the 2005 anima
 
 ## Run locally
 
+## GitHub Pages
+
+The Pages build uses the same game components and artwork in a standalone browser application. Run `npm run build:pages`, then `node scripts/check-pages.mjs`. Output is in `dist-pages/`; each activity has its own directory entry point so direct links and refresh work without a server. `PAGES_BASE_PATH` selects the repository URL prefix (default `/avatar-element-quest/`).
+
+The `.github/workflows/pages.yml` workflow builds and publishes automatically on pushes to `main`. Select **GitHub Actions** in the repository's **Settings → Pages**. The original Sites build remains available through `npm run build`.
+
+## Local Sites development
+
 Use Node 22.13+ and npm. Run `npm install`, then `npm run dev`. Open the address printed by the server (normally http://localhost:3000).
 
 Run `npm run build` for the production build. Run `node scripts/check-game.mjs` for scoring/content checks and `node node_modules/typescript/bin/tsc --noEmit` for type checking.
